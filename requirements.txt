@@ -1,0 +1,47 @@
+# Python 3.10. Packages used by preprocess, train, inference, and offline metrics.
+#
+# Install a CUDA-enabled PyTorch build before this file, for example:
+#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
+#   pip install xformers==0.0.34
+# Tested with:
+#   torch==2.11.0.dev20260129+cu128
+#   torchvision==0.25.0.dev20260129+cu128
+#   torchaudio==2.11.0.dev20260129+cu128
+#   xformers==0.0.34
+
+numpy==1.26.4
+pillow==10.4.0
+opencv-python==4.11.0.86
+tqdm==4.67.1
+PyYAML==6.0.3
+scipy==1.15.3
+einops==0.8.2
+timm==0.6.12
+mmcv==1.7.0
+addict==2.4.0
+accelerate==1.12.0
+diffusers==0.30.0
+transformers==5.4.0
+huggingface_hub==1.8.0
+tokenizers==0.22.2
+safetensors==0.7.0
+sentencepiece==0.2.0
+protobuf==3.20.2
+ftfy==6.3.1
+regex==2026.1.15
+requests==2.32.5
+packaging
+peft==0.18.1
+optimum==2.1.0
+tensorboard==2.20.0
+tensorboardX==2.6.4
+faiss-gpu==1.7.2
+lpips==0.1.4
+pytorch-fid==0.3.0
+beautifulsoup4==4.14.3
+yapf==0.40.1
+psutil==7.2.2
+filelock==3.20.3
+fsspec==2026.1.0
+typing_extensions==4.15.0
+absl-py==2.4.0

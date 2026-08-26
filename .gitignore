@@ -1,0 +1,14 @@
+dataset/
+models/
+output/
+work_dirs/
+**/__pycache__/
+*.pyc
+.venv/
+.env
+*.ckpt
+*.pth
+*.pt
+.sface_embedding_cache/
+.adaface_embedding_cache/
+*_hf_stage/
