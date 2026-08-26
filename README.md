@@ -2,11 +2,10 @@
 
 **IdentiFace: Multi-Modal Iterative Diffusion Framework for Identifiable Suspect Face Generation in Crime Investigations**
 
-Official code for the paper. See [IdentiFace.pdf](IdentiFace.pdf). 
+Paper: [IdentiFace.pdf](IdentiFace.pdf). 
 
 This repository provides the official IdentiFace implementation on PixArt-alpha, a **preprocess → train → inference → offline metrics calculation** pipeline.
-
-Run all commands from the repository root.
+Note that "long prompt" in the repo refers to "long text" in our paper.
 
 ## Setup
 
