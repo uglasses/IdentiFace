@@ -2,9 +2,9 @@
 
 **IdentiFace: Multi-Modal Iterative Diffusion Framework for Identifiable Suspect Face Generation in Crime Investigations**
 
-Official code for the paper. See [IdentiFace.pdf](IdentiFace.pdf). Project page: https://github.com/uglasses/IdentiFace
+Official code for the paper. See [IdentiFace.pdf](IdentiFace.pdf). 
 
-This repository provides the **preprocess → train → batch inference → offline metrics** pipeline. Datasets and model weights are **not** included.
+This repository provides the official IdentiFace implementation on PixArt-alpha, a **preprocess → train → inference → offline metrics calculation** pipeline.
 
 Run all commands from the repository root.
 
@@ -93,4 +93,4 @@ Writes `batch_metrics_one_shot_summary.json` (and `batch_metrics_best_match_summ
 
 ## Acknowledgements
 
-We thank [RelaCtrl](https://github.com/360CVGroup/RelaCtrl) and [PixArt-α](https://github.com/PixArt-alpha/PixArt-alpha) for providing source code that this project builds upon.
+We thank [RelaCtrl](https://github.com/360CVGroup/RelaCtrl) and [PixArt-α](https://github.com/PixArt-alpha/PixArt-alpha) and other related open source projects for providing source code and model weights that this project builds upon.
