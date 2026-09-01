@@ -33,10 +33,10 @@ Place data under `dataset/ID-FFHQ/` (images, `data_info_FFHQ.json`, and after pr
 | `SFace_backbone.pth` | infer 1:N | [Google Drive](https://drive.google.com/drive/folders/1cxhzIvyXYRr8ZMnL1AKtslqpn6lYKpwC) |
 | SegFace: `SegFace/weights/convnext_celeba_512/model_299.pt` | infer facial masks | [Hugging Face](https://huggingface.co/kartiknarayan/SegFace/resolve/main/convnext_celeba_512/model_299.pt) |
 | `fg-clip2-large/` | offline FG-CLIP score (optional) | [Hugging Face](https://huggingface.co/qihoo360/fg-clip2-large) |
-| Checkpoint (on ID-FFHQ) | inference model | Coming soon |
+| Checkpoint (on ID-FFHQ) | inference model | [Hugging Face](https://huggingface.co/uglasses/IdentiFace-PixArt-FFHQ) |
 
 ## Datasets (`dataset/`)
-ID-FFHQ [BaiduNetDisk](https://pan.baidu.com/s/1-MhEnl5IFg11TQJZusw94Q?pwd=n28d) Extraction Code: n28d
+ID-FFHQ  [Hugging Face](https://huggingface.co/datasets/uglasses/ID-FFHQ), [BaiduNetDisk](https://pan.baidu.com/s/1-MhEnl5IFg11TQJZusw94Q?pwd=n28d) Extraction Code: n28d
 
 After training, copy the run directory (must contain `config.py` and `checkpoints/latest.pth`) to `models/controlnet_checkpoint/`, or set `MODEL_DIR` / `CKPT`.
 
