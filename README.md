@@ -35,7 +35,7 @@ Place data under `dataset/ID-FFHQ/` (images, `data_info_FFHQ.json`, and after pr
 | Checkpoint (on ID-FFHQ) | inference model | [Hugging Face](https://huggingface.co/uglasses/IdentiFace-PixArt-FFHQ) |
 
 ## Datasets (`dataset/`)
-ID-FFHQ  [Hugging Face](https://huggingface.co/datasets/uglasses/ID-FFHQ), [BaiduNetDisk](https://pan.baidu.com/s/1-MhEnl5IFg11TQJZusw94Q?pwd=n28d) Extraction Code: n28d
+ID-FFHQ  [Hugging Face](https://huggingface.co/datasets/uglasses/ID-FFHQ), [Google Drive](https://drive.google.com/file/d/1TJHjvz5TLLfhRyoSkFth2IQwuAn6k6yi/view?usp=sharing), [BaiduNetDisk](https://pan.baidu.com/s/1-MhEnl5IFg11TQJZusw94Q?pwd=n28d) (Extraction Code: n28d)
 
 After training, copy the run directory (must contain `config.py` and `checkpoints/latest.pth`) to `models/controlnet_checkpoint/`, or set `MODEL_DIR` / `CKPT`.
 
