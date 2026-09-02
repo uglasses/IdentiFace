@@ -32,7 +32,7 @@ Place data under `dataset/ID-FFHQ/` (images, `data_info_FFHQ.json`, and after pr
 | `SFace_backbone.pth` | infer 1:N | [Google Drive](https://drive.google.com/drive/folders/1cxhzIvyXYRr8ZMnL1AKtslqpn6lYKpwC) |
 | SegFace: `SegFace/weights/convnext_celeba_512/model_299.pt` | infer facial masks | [Hugging Face](https://huggingface.co/kartiknarayan/SegFace/resolve/main/convnext_celeba_512/model_299.pt) |
 | `fg-clip2-large/` | offline FG-CLIP score (optional) | [Hugging Face](https://huggingface.co/qihoo360/fg-clip2-large) |
-| Checkpoint (on ID-FFHQ) | inference model | [Hugging Face](https://huggingface.co/uglasses/IdentiFace-PixArt-FFHQ) |
+| Checkpoint (on ID-FFHQ) | inference model | [Hugging Face](https://huggingface.co/uglasses/IdentiFace-PixArt-FFHQ), [Google Drive](https://drive.google.com/file/d/1nIf1kRVfkyF4E_B0axC-9K6vDrnMCcJq/view?usp=sharing) |
 
 ## Datasets (`dataset/`)
 ID-FFHQ  [Hugging Face](https://huggingface.co/datasets/uglasses/ID-FFHQ), [Google Drive](https://drive.google.com/file/d/1TJHjvz5TLLfhRyoSkFth2IQwuAn6k6yi/view?usp=sharing), [BaiduNetDisk](https://pan.baidu.com/s/1-MhEnl5IFg11TQJZusw94Q?pwd=n28d) (Extraction Code: n28d)
