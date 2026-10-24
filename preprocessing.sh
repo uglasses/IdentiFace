@@ -19,5 +19,4 @@ python preprocess_dataset.py \
     --input_metadata "$INPUT_METADATA" \
     --image_dir "$IMAGE_DIR" \
     --use_long_prompt \
-    --use_hard_lq \
     --hard_lq_camera_target_size 32

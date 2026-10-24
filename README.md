@@ -2,7 +2,7 @@
 
 **IdentiFace: Multi-Modal Iterative Diffusion Framework for Identifiable Suspect Face Generation in Crime Investigations**
 
-Paper: [IdentiFace.pdf](IdentiFace.pdf). 
+Paper: [IdentiFace](IdentiFace.pdf), [Supplementary Material](Supplementary_Material.pdf).
 
 This repository provides the official IdentiFace implementation on PixArt-alpha, a **preprocess → train → inference → offline metrics calculation** pipeline.
 Note that "long prompt" in the repo refers to "long text" in our paper.
@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 `requirements.txt` lists packages used by preprocess, train, inference, and metrics. Gradio / FastAPI and other unused extras are omitted.
 
-Place data under `dataset/ID-FFHQ/` (images, `data_info_FFHQ.json`, and after preprocessing `InternData/`). Place weights under `models/` as listed below.
+Place data under `dataset/ID-FFHQ/` (images, `data_info_FFHQ.json`, and after preprocessing `InternData/`) or `dataset/ID-CelebA/` (see [Datasets](#datasets-dataset)). Place weights under `models/` as listed below.
 
 ## Weights (`models/`)
 
@@ -34,10 +34,34 @@ Place data under `dataset/ID-FFHQ/` (images, `data_info_FFHQ.json`, and after pr
 | `fg-clip2-large/` | offline FG-CLIP score (optional) | [Hugging Face](https://huggingface.co/qihoo360/fg-clip2-large) |
 | Checkpoint (on ID-FFHQ) | inference model | [Hugging Face](https://huggingface.co/uglasses/IdentiFace-PixArt-FFHQ), [Google Drive](https://drive.google.com/file/d/1nIf1kRVfkyF4E_B0axC-9K6vDrnMCcJq/view?usp=sharing) |
 
-## Datasets (`dataset/`)
-ID-FFHQ  [Hugging Face](https://huggingface.co/datasets/uglasses/ID-FFHQ), [Google Drive](https://drive.google.com/file/d/1TJHjvz5TLLfhRyoSkFth2IQwuAn6k6yi/view?usp=sharing), [BaiduNetDisk](https://pan.baidu.com/s/1-MhEnl5IFg11TQJZusw94Q?pwd=n28d) (Extraction Code: n28d)
+## Prompts (`prompts/`)
 
-After training, copy the run directory (must contain `config.py` and `checkpoints/latest.pth`) to `models/controlnet_checkpoint/`, or set `MODEL_DIR` / `CKPT`.
+VLM prompts used to build ID-FFHQ and ID-CelebA (Supplementary Material, Sec. II). Each prompt is sent as the text message together with a single image; any OpenAI-compatible endpoint (e.g. a local vLLM deployment or a cloud API) can serve the models.
+
+| File | Model | Stage | Output |
+| --- | --- | --- | --- |
+| `singleFace_prompt.txt` | Qwen3-VL | Quality filtering: face count | `Yes` = multiple faces |
+| `front_prompt.txt` | Qwen3-VL | Pose filtering: frontal face | `Yes` = frontal face |
+| `AIEditDetect_prompt.txt` | Qwen3-VL | Quality check after accessory removal | `Yes` = severe editing artifacts |
+| `describe_prompt.txt` | Qwen3.5-VL | Fine-grained text synthesis | One structured paragraph 
+
+
+`describe_prompt.txt` produces the long text (`long_prompt` in `data_info`). It starts with a global sentence (`The photo of a realistic face of ...` with gender, age range, and ethnicity), followed by segments that each begin with SegFace label tags:
+
+```text
+The photo of a realistic face of ... ['overview'] ... ['hair'] ... ['l_eye', 'r_eye'] ... ['l_brow', 'r_brow'] ... ['l_ear', 'r_ear'] ... ['nose'] ... ['mouth', 'l_lip', 'u_lip'] ...
+```
+
+The short `prompt` field is the global sentence plus the overview segment. `long_prompt_segmentation.py` parses the tags so that each text segment can be paired with its facial region, which is used for local text during training and for mask-guided editing during inference.
+
+## Datasets (`dataset/`)
+
+| Dataset | Derived from | Images | Identities | Resolution | Download |
+| --- | --- | ---: | ---: | --- | --- |
+| ID-FFHQ | FFHQ | 25,839 | 21,857 | 1024×1024 | [Hugging Face](https://huggingface.co/datasets/uglasses/ID-FFHQ), [Google Drive](https://drive.google.com/file/d/1TJHjvz5TLLfhRyoSkFth2IQwuAn6k6yi/view?usp=sharing), [BaiduNetDisk](https://pan.baidu.com/s/1-MhEnl5IFg11TQJZusw94Q?pwd=n28d) (Extraction Code: n28d) |
+| ID-CelebA | CelebAMask-HQ | 18,197 | 5,054 | 512×512 | Annotations only: [ID-CelebA-data_info](ID-CelebA-data_info/) |
+
+To obtain complete data of ID-CelebA, please follow [ID-CelebA-data_info/README.md](ID-CelebA-data_info/README.md) to rebuild the images, sketches, and LQ images from the original CelebAMask-HQ.
 
 ## 1. Preprocess
 
@@ -58,6 +82,8 @@ NUM_GPUS=4 ./start_training.sh
 Defaults: `configs/train_controlnet_ffhq_1024.py`, `dataset/ID-FFHQ`, `work_dirs/controlnet_ffhq`.
 
 ## 3. Inference
+
+After training, copy the run directory (must contain `config.py` and `checkpoints/latest.pth`) to `models/controlnet_checkpoint/`, or set `MODEL_DIR` / `CKPT`.
 
 ```bash
 MODEL_DIR=models/controlnet_checkpoint CKPT=models/controlnet_checkpoint/checkpoints/latest.pth \
@@ -84,7 +110,10 @@ Writes `batch_metrics_one_shot_summary.json` (and `batch_metrics_best_match_summ
 
 - `preprocess_dataset.py`, `inference_controlnet.py`, `AdaFace.py`, `long_prompt_segmentation.py`
 - `configs/train_controlnet_ffhq_1024.py`
-- `preprocessing.sh`, `start_training.sh`
+- `preprocessing.sh`, `start_training.sh`, `run_inference.sh`
+- `prompts/`: VLM prompts for dataset construction
+- `ID-CelebA-data_info/`: ID-CelebA filtering results, `data_info`, and reproduction guide
+- `SegFace/batch_detect_accessories.py`: accessory detection for dataset construction
 - `other_tools/camera_lq_pipeline.py`
 - `other_tools/compute.sh`, `other_tools/compute_batch_metrics_offline.py`, `other_tools/other_impls.py`
 - `other_tools/FG-CLIP/fgclip_similarity.py`
